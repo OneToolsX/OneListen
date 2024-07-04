@@ -1,9 +1,10 @@
-'use client'
+
+"use client"
 
 import { useEffect, useState } from 'react';
 import { invoke } from '@tauri-apps/api/tauri'
 
-export default function Greet() {
+export default function PlayerBar() {
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
