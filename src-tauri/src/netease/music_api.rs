@@ -6,8 +6,8 @@ use crate::netease::crypto::{Crypto, HashType};
 use crate::netease::request::generate_response;
 use std::collections::HashMap;
 
-use crate::netease::FormatParams;
-use crate::netease::Options;
+use crate::FormatParams;
+use crate::Options;
 
 fn get_cookie_string(cookie: &str) -> String {
     if !cookie.is_empty() {
@@ -46,7 +46,7 @@ fn request_handler(
 }
 
 // #[get("/album/detail/dynamic")]
-pub(crate) fn index_album_detail_dynamic(options: Options) -> FormatParams {
+pub fn index_album_detail_dynamic(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/album/detail/dynamic";
     let cookies = get_cookie_string(options.cookie);
     let query_string = QueryParams::from(options.params);
@@ -59,13 +59,13 @@ pub(crate) fn index_album_detail_dynamic(options: Options) -> FormatParams {
 }
 
 // #[get("/album/newest")]
-pub(crate) fn index_album_newest(options: Options) -> FormatParams {
+pub fn index_album_newest(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/discovery/newAlbum";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/album/sub")]
-pub(crate) fn index_album_sub(options: Options) -> FormatParams {
+pub fn index_album_sub(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let sub = query_string
         .value("t")
@@ -86,7 +86,7 @@ pub(crate) fn index_album_sub(options: Options) -> FormatParams {
 }
 
 // #[get("/album/sublist")]
-pub(crate) fn index_album_sublist(options: Options) -> FormatParams {
+pub fn index_album_sublist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/album/sublist";
     let query_string = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -99,7 +99,7 @@ pub(crate) fn index_album_sublist(options: Options) -> FormatParams {
 }
 
 // #[get("/album")]
-pub(crate) fn index_album(options: Options) -> FormatParams {
+pub fn index_album(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/v1/album/{}",
@@ -109,7 +109,7 @@ pub(crate) fn index_album(options: Options) -> FormatParams {
 }
 
 // #[get("/artist/detail")]
-pub(crate) fn index_artist_detail(options: Options) -> FormatParams {
+pub fn index_artist_detail(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let id = query_string.value("id").unwrap();
     let url = &format!("https://music.163.com/api/artist/head/info/get?id={}", id);
@@ -121,7 +121,7 @@ pub(crate) fn index_artist_detail(options: Options) -> FormatParams {
 }
 
 // #[get("/artist/album")]
-pub(crate) fn index_artist_album(options: Options) -> FormatParams {
+pub fn index_artist_album(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/artist/albums/{}",
@@ -139,7 +139,7 @@ pub(crate) fn index_artist_album(options: Options) -> FormatParams {
 }
 
 // #[get("/artist/desc")]
-pub(crate) fn index_artist_desc(options: Options) -> FormatParams {
+pub fn index_artist_desc(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/artist/introduction";
     let query_string = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -172,7 +172,7 @@ pub(crate) fn index_artist_desc(options: Options) -> FormatParams {
 */
 
 // #[get("/artist/list")]
-pub(crate) fn index_artist_list(options: Options) -> FormatParams {
+pub fn index_artist_list(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/artist/list";
     let query_string = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -186,7 +186,7 @@ pub(crate) fn index_artist_list(options: Options) -> FormatParams {
 }
 
 // #[get("/artist/mv")]
-pub(crate) fn index_artist_mv(options: Options) -> FormatParams {
+pub fn index_artist_mv(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/artist/mvs";
     let query_string = QueryParams::from(options.params);
 
@@ -202,7 +202,7 @@ pub(crate) fn index_artist_mv(options: Options) -> FormatParams {
 }
 
 // #[get("/artist/sub")]
-pub(crate) fn index_artist_sub(options: Options) -> FormatParams {
+pub fn index_artist_sub(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let sub = query_string
         .value("t")
@@ -225,7 +225,7 @@ pub(crate) fn index_artist_sub(options: Options) -> FormatParams {
 }
 
 // #[get("/artist/sublist")]
-pub(crate) fn index_artist_sublist(options: Options) -> FormatParams {
+pub fn index_artist_sublist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/artist/sublist";
     let query_string = QueryParams::from(options.params);
 
@@ -240,7 +240,7 @@ pub(crate) fn index_artist_sublist(options: Options) -> FormatParams {
 }
 
 // #[get("/artist/top/song")]
-pub(crate) fn index_artist_top_song(options: Options) -> FormatParams {
+pub fn index_artist_top_song(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/artist/top/song";
     let query_string = QueryParams::from(options.params);
 
@@ -253,7 +253,7 @@ pub(crate) fn index_artist_top_song(options: Options) -> FormatParams {
 }
 
 // #[get("/artists")]
-pub(crate) fn index_artists(options: Options) -> FormatParams {
+pub fn index_artists(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/v1/artist/{}",
@@ -263,7 +263,7 @@ pub(crate) fn index_artists(options: Options) -> FormatParams {
 }
 
 // #[get("/banner")]
-pub(crate) fn index_banner(options: Options) -> FormatParams {
+pub fn index_banner(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = "https://music.163.com/api/v2/banner/get";
     let type_arr = ["pc", "android", "iphone", "ipad"];
@@ -276,7 +276,7 @@ pub(crate) fn index_banner(options: Options) -> FormatParams {
 }
 
 // #[get("/check/music")]
-pub(crate) fn index_check_music(options: Options) -> FormatParams {
+pub fn index_check_music(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/song/enhance/player/url";
 
     let query_string = QueryParams::from(options.params);
@@ -303,7 +303,7 @@ fn comment_common(url: &str, query_string: QueryParams<'_>, cookie: &str) -> For
 }
 
 // #[get("/comment/album")]
-pub(crate) fn index_comment_album(options: Options) -> FormatParams {
+pub fn index_comment_album(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/v1/resource/comments/R_AL_3_{}",
@@ -313,7 +313,7 @@ pub(crate) fn index_comment_album(options: Options) -> FormatParams {
 }
 
 // #[get("/comment/dj")]
-pub(crate) fn index_comment_dj(options: Options) -> FormatParams {
+pub fn index_comment_dj(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/v1/resource/comments/A_DJ_1_{}",
@@ -323,7 +323,7 @@ pub(crate) fn index_comment_dj(options: Options) -> FormatParams {
 }
 
 // #[get("/comment/event")]
-pub(crate) fn index_comment_event(options: Options) -> FormatParams {
+pub fn index_comment_event(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/v1/resource/comments/{}",
@@ -340,7 +340,7 @@ pub(crate) fn index_comment_event(options: Options) -> FormatParams {
 }
 
 // #[get("/comment/hot")]
-pub(crate) fn index_comment_hot(options: Options) -> FormatParams {
+pub fn index_comment_hot(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let _type: &str = [
         "R_SO_4_", "R_MV_5_", "A_PL_0_", "R_AL_3_", "A_DJ_1_", "R_VI_62_",
@@ -358,13 +358,13 @@ pub(crate) fn index_comment_hot(options: Options) -> FormatParams {
 }
 
 // #[get("/comment/hotwall/list")]
-pub(crate) fn index_comment_hotwall_list(options: Options) -> FormatParams {
+pub fn index_comment_hotwall_list(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/comment/hotwall/list/get";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/comment/like")]
-pub(crate) fn index_comment_like(options: Options) -> FormatParams {
+pub fn index_comment_like(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let like = if query_string.value("t").unwrap_or("0") == "1" {
         "like"
@@ -389,7 +389,7 @@ pub(crate) fn index_comment_like(options: Options) -> FormatParams {
 }
 
 // #[get("/comment/music")]
-pub(crate) fn index_comment_music(options: Options) -> FormatParams {
+pub fn index_comment_music(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/api/v1/resource/comments/R_SO_4_{}",
@@ -399,7 +399,7 @@ pub(crate) fn index_comment_music(options: Options) -> FormatParams {
 }
 
 // #[get("/comment/mv")]
-pub(crate) fn index_comment_mv(options: Options) -> FormatParams {
+pub fn index_comment_mv(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/v1/resource/comments/R_MV_5_{}",
@@ -409,7 +409,7 @@ pub(crate) fn index_comment_mv(options: Options) -> FormatParams {
 }
 
 // #[get("/comment/playlist")]
-pub(crate) fn index_comment_playlist(options: Options) -> FormatParams {
+pub fn index_comment_playlist(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/v1/resource/comments/A_PL_0_{}",
@@ -419,7 +419,7 @@ pub(crate) fn index_comment_playlist(options: Options) -> FormatParams {
 }
 
 // #[get("/comment")]
-pub(crate) fn index_comment(options: Options) -> FormatParams {
+pub fn index_comment(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let _t = ["add", "delete", "reply"][query_string
         .value("t")
@@ -458,7 +458,7 @@ pub(crate) fn index_comment(options: Options) -> FormatParams {
 }
 
 // #[get("/daily_signin")]
-pub(crate) fn index_daily_sigin(options: Options) -> FormatParams {
+pub fn index_daily_sigin(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/point/dailyTask";
 
     let query_string = QueryParams::from(options.params);
@@ -476,7 +476,7 @@ pub(crate) fn index_daily_sigin(options: Options) -> FormatParams {
 }
 
 // #[get("/digitalAlbum/purchased")]
-pub(crate) fn index_digitalAlbum_purchased(options: Options) -> FormatParams {
+pub fn index_digitalAlbum_purchased(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/digitalAlbum/purchased";
 
     let query_string = QueryParams::from(options.params);
@@ -496,31 +496,31 @@ pub(crate) fn index_digitalAlbum_purchased(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/banner")]
-pub(crate) fn index_dj_banner(options: Options) -> FormatParams {
+pub fn index_dj_banner(options: Options) -> FormatParams {
     let url = "http://music.163.com/weapi/djradio/banner/get";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/dj/category/excludehot")]
-pub(crate) fn index_dj_category_excludehot(options: Options) -> FormatParams {
+pub fn index_dj_category_excludehot(options: Options) -> FormatParams {
     let url = "http://music.163.com/weapi/djradio/category/excludehot";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/dj/category/recommend")]
-pub(crate) fn index_dj_category_recommend(options: Options) -> FormatParams {
+pub fn index_dj_category_recommend(options: Options) -> FormatParams {
     let url = "http://music.163.com/weapi/djradio/home/category/recommend";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/dj/catelist")]
-pub(crate) fn index_dj_catelist(options: Options) -> FormatParams {
+pub fn index_dj_catelist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/djradio/category/get";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/dj/detail")]
-pub(crate) fn index_dj_detail(options: Options) -> FormatParams {
+pub fn index_dj_detail(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/djradio/get";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -531,7 +531,7 @@ pub(crate) fn index_dj_detail(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/hot")]
-pub(crate) fn index_dj_hot(options: Options) -> FormatParams {
+pub fn index_dj_hot(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/djradio/hot/v1";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -543,7 +543,7 @@ pub(crate) fn index_dj_hot(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/paygift")]
-pub(crate) fn index_dj_paygift(options: Options) -> FormatParams {
+pub fn index_dj_paygift(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/djradio/home/paygift/list?_nmclfl=1";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -555,7 +555,7 @@ pub(crate) fn index_dj_paygift(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/program/detail")]
-pub(crate) fn index_dj_program_detail(options: Options) -> FormatParams {
+pub fn index_dj_program_detail(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/dj/program/detail";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -566,7 +566,7 @@ pub(crate) fn index_dj_program_detail(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/program/toplist/hours")]
-pub(crate) fn index_dj_program_toplist_hours(options: Options) -> FormatParams {
+pub fn index_dj_program_toplist_hours(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/djprogram/toplist/hours";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -577,7 +577,7 @@ pub(crate) fn index_dj_program_toplist_hours(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/program/toplist")]
-pub(crate) fn index_dj_program_toplist(options: Options) -> FormatParams {
+pub fn index_dj_program_toplist(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/program/toplist/v1";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -589,7 +589,7 @@ pub(crate) fn index_dj_program_toplist(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/program")]
-pub(crate) fn index_dj_program(options: Options) -> FormatParams {
+pub fn index_dj_program(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/dj/program/byradio";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -603,7 +603,7 @@ pub(crate) fn index_dj_program(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/radio/hot")]
-pub(crate) fn index_dj_radio_hot(options: Options) -> FormatParams {
+pub fn index_dj_radio_hot(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/djradio/hot";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -640,7 +640,7 @@ pub(crate) fn index_dj_radio_hot(options: Options) -> FormatParams {
 */
 
 // #[get("/dj/recommend/type")]
-pub(crate) fn index_dj_recommend_type(options: Options) -> FormatParams {
+pub fn index_dj_recommend_type(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/djradio/recommend";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -651,13 +651,13 @@ pub(crate) fn index_dj_recommend_type(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/recommend")]
-pub(crate) fn index_dj_recommend(options: Options) -> FormatParams {
+pub fn index_dj_recommend(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/djradio/recommend/v1";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/dj/sub")]
-pub(crate) fn index_dj_sub(options: Options) -> FormatParams {
+pub fn index_dj_sub(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let sub = if query.value("t").unwrap_or("0") == "1" {
         "sub"
@@ -673,7 +673,7 @@ pub(crate) fn index_dj_sub(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/sublist")]
-pub(crate) fn index_dj_sublist(options: Options) -> FormatParams {
+pub fn index_dj_sublist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/djradio/get/subed";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -686,7 +686,7 @@ pub(crate) fn index_dj_sublist(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/today/perfered")]
-pub(crate) fn index_dj_today_perfered(options: Options) -> FormatParams {
+pub fn index_dj_today_perfered(options: Options) -> FormatParams {
     let url = "http://music.163.com/weapi/djradio/home/today/perfered";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -697,7 +697,7 @@ pub(crate) fn index_dj_today_perfered(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/toplist/hours")]
-pub(crate) fn index_dj_toplist_hours(options: Options) -> FormatParams {
+pub fn index_dj_toplist_hours(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/dj/toplist/hours";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -708,7 +708,7 @@ pub(crate) fn index_dj_toplist_hours(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/toplist/newcomer")]
-pub(crate) fn index_dj_toplist_newcomer(options: Options) -> FormatParams {
+pub fn index_dj_toplist_newcomer(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/dj/toplist/newcomer";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -720,7 +720,7 @@ pub(crate) fn index_dj_toplist_newcomer(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/toplist/pay")]
-pub(crate) fn index_dj_toplist_pay(options: Options) -> FormatParams {
+pub fn index_dj_toplist_pay(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/djradio/toplist/pay";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -731,7 +731,7 @@ pub(crate) fn index_dj_toplist_pay(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/toplist/popular")]
-pub(crate) fn index_dj_toplist_popular(options: Options) -> FormatParams {
+pub fn index_dj_toplist_popular(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/dj/toplist/popular";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -742,7 +742,7 @@ pub(crate) fn index_dj_toplist_popular(options: Options) -> FormatParams {
 }
 
 // #[get("/dj/toplist")]
-pub(crate) fn index_dj_toplist(options: Options) -> FormatParams {
+pub fn index_dj_toplist(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/djradio/toplist";
     let query = QueryParams::from(options.params);
     let _type = if query.value("type").unwrap_or("new") == "new" {
@@ -760,7 +760,7 @@ pub(crate) fn index_dj_toplist(options: Options) -> FormatParams {
 }
 
 // #[get("/event/del")]
-pub(crate) fn index_event_del(options: Options) -> FormatParams {
+pub fn index_event_del(options: Options) -> FormatParams {
     let url = "https://music.163.com/eapi/event/delete";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -771,7 +771,7 @@ pub(crate) fn index_event_del(options: Options) -> FormatParams {
 }
 
 // #[get("/event/forward")]
-pub(crate) fn index_event_forward(options: Options) -> FormatParams {
+pub fn index_event_forward(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/event/forward";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -784,7 +784,7 @@ pub(crate) fn index_event_forward(options: Options) -> FormatParams {
 }
 
 // #[get("/event")]
-pub(crate) fn index_event(options: Options) -> FormatParams {
+pub fn index_event(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v1/event/get";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -796,7 +796,7 @@ pub(crate) fn index_event(options: Options) -> FormatParams {
 }
 
 // #[get("/fm/trash")]
-pub(crate) fn index_fm_trash(options: Options) -> FormatParams {
+pub fn index_fm_trash(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/radio/trash/add?alg=RT&songId={}&time={}",
@@ -811,7 +811,7 @@ pub(crate) fn index_fm_trash(options: Options) -> FormatParams {
 }
 
 // #[get("/follow")]
-pub(crate) fn index_follow(options: Options) -> FormatParams {
+pub fn index_follow(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let _t = if query.value("t").unwrap_or("0") == "1" {
         "follow"
@@ -829,7 +829,7 @@ pub(crate) fn index_follow(options: Options) -> FormatParams {
 }
 
 // #[get("/hot/topic")]
-pub(crate) fn index_hot_topic(options: Options) -> FormatParams {
+pub fn index_hot_topic(options: Options) -> FormatParams {
     let url = "http://music.163.com/weapi/act/hot";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -841,7 +841,7 @@ pub(crate) fn index_hot_topic(options: Options) -> FormatParams {
 }
 
 // #[get("/like")]
-pub(crate) fn index_like(options: Options) -> FormatParams {
+pub fn index_like(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/radio/like?alg={}&trackId={}&time={}",
@@ -858,7 +858,7 @@ pub(crate) fn index_like(options: Options) -> FormatParams {
 }
 
 // #[get("/likelist")]
-pub(crate) fn index_likelist(options: Options) -> FormatParams {
+pub fn index_likelist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/song/like/get";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -869,7 +869,7 @@ pub(crate) fn index_likelist(options: Options) -> FormatParams {
 }
 
 // #[get("/login/cellphone")]
-pub(crate) fn index_login_cellphone(options: Options) -> FormatParams {
+pub fn index_login_cellphone(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/login/cellphone";
     let query_string = QueryParams::from(options.params);
     let pw = Crypto::hash_encrypt(
@@ -889,7 +889,7 @@ pub(crate) fn index_login_cellphone(options: Options) -> FormatParams {
 }
 
 // #[get("/login/qr/key")]
-pub(crate) fn index_login_qr_key(options: Options) -> FormatParams {
+pub fn index_login_qr_key(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/login/qrcode/unikey";
     let query_params = json_object!({
         "type": "1",
@@ -900,7 +900,7 @@ pub(crate) fn index_login_qr_key(options: Options) -> FormatParams {
 }
 
 // #[get("/login/qr/create")]
-pub(crate) fn index_login_qr_create(options: Options) -> FormatParams {
+pub fn index_login_qr_create(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let codekey = query.value("key").unwrap();
     let url = &format!("https://music.163.com/login?codekey={}", codekey);
@@ -910,7 +910,7 @@ pub(crate) fn index_login_qr_create(options: Options) -> FormatParams {
 }
 
 // #[get("/login/qr/check")]
-pub(crate) fn index_login_qr_check(options: Options) -> FormatParams {
+pub fn index_login_qr_check(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/login/qrcode/client/login";
     let query = QueryParams::from(options.params);
     let _params = json_object!({
@@ -922,7 +922,7 @@ pub(crate) fn index_login_qr_check(options: Options) -> FormatParams {
 }
 
 // #[get("/login/status")]
-pub(crate) fn index_login_status(options: Options) -> FormatParams {
+pub fn index_login_status(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/w/nuser/account/get";
     let _params = json_object!({});
     let cookies = get_cookie_string(options.cookie);
@@ -930,13 +930,13 @@ pub(crate) fn index_login_status(options: Options) -> FormatParams {
 }
 
 // #[get("/login/refresh")]
-pub(crate) fn index_login_refresh(options: Options) -> FormatParams {
+pub fn index_login_refresh(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/login/token/refresh";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/logout")]
-pub(crate) fn index_logout(options: Options) -> FormatParams {
+pub fn index_logout(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/logout";
     let query_params = json_object!({});
     let cookies = get_cookie_string(options.cookie);
@@ -950,7 +950,7 @@ pub(crate) fn index_logout(options: Options) -> FormatParams {
 }
 
 // #[get("/lyric")]
-pub(crate) fn index_lyric(options: Options) -> FormatParams {
+pub fn index_lyric(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/song/lyric?lv=-1&kv=-1&tv=-1";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -962,7 +962,7 @@ pub(crate) fn index_lyric(options: Options) -> FormatParams {
 }
 
 // #[get("/msg/comments")]
-pub(crate) fn index_msg_comments(options: Options) -> FormatParams {
+pub fn index_msg_comments(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/api/v1/user/comments/{}",
@@ -979,7 +979,7 @@ pub(crate) fn index_msg_comments(options: Options) -> FormatParams {
 }
 
 // #[get("/msg/forwards")]
-pub(crate) fn index_msg_forwards(options: Options) -> FormatParams {
+pub fn index_msg_forwards(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/forwards/get";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -992,7 +992,7 @@ pub(crate) fn index_msg_forwards(options: Options) -> FormatParams {
 }
 
 // #[get("/msg/notices")]
-pub(crate) fn index_msg_notices(options: Options) -> FormatParams {
+pub fn index_msg_notices(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/msg/notices";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1005,7 +1005,7 @@ pub(crate) fn index_msg_notices(options: Options) -> FormatParams {
 }
 
 // #[get("/msg/private/history")]
-pub(crate) fn index_msg_private_history(options: Options) -> FormatParams {
+pub fn index_msg_private_history(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/msg/private/history";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1019,7 +1019,7 @@ pub(crate) fn index_msg_private_history(options: Options) -> FormatParams {
 }
 
 // #[get("/msg/private")]
-pub(crate) fn index_msg_private(options: Options) -> FormatParams {
+pub fn index_msg_private(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/msg/private/users";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1032,7 +1032,7 @@ pub(crate) fn index_msg_private(options: Options) -> FormatParams {
 }
 
 // #[get("/mv/all")]
-pub(crate) fn index_mv_all(options: Options) -> FormatParams {
+pub fn index_mv_all(options: Options) -> FormatParams {
     let url = "https://interface.music.163.com/api/mv/all";
     let query = QueryParams::from(options.params);
     let tags = &format!(
@@ -1052,7 +1052,7 @@ pub(crate) fn index_mv_all(options: Options) -> FormatParams {
 }
 
 // #[get("/mv/detail")]
-pub(crate) fn index_mv_detail(options: Options) -> FormatParams {
+pub fn index_mv_detail(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/mv/detail";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1063,7 +1063,7 @@ pub(crate) fn index_mv_detail(options: Options) -> FormatParams {
 }
 
 // #[get("/mv/exclusive/rcmd")]
-pub(crate) fn index_mv_exclusive_rcmd(options: Options) -> FormatParams {
+pub fn index_mv_exclusive_rcmd(options: Options) -> FormatParams {
     let url = "https://interface.music.163.com/api/mv/exclusive/rcmd";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1075,7 +1075,7 @@ pub(crate) fn index_mv_exclusive_rcmd(options: Options) -> FormatParams {
 }
 
 // #[get("/mv/first")]
-pub(crate) fn index_mv_first(options: Options) -> FormatParams {
+pub fn index_mv_first(options: Options) -> FormatParams {
     let url = "https://interface.music.163.com/weapi/mv/first";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1088,7 +1088,7 @@ pub(crate) fn index_mv_first(options: Options) -> FormatParams {
 }
 
 // #[get("/mv/sub")]
-pub(crate) fn index_mv_sub(options: Options) -> FormatParams {
+pub fn index_mv_sub(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let _t = if query.value("t").unwrap_or("0") == "1" {
         "sub"
@@ -1106,7 +1106,7 @@ pub(crate) fn index_mv_sub(options: Options) -> FormatParams {
 }
 
 // #[get("/mv/sublist")]
-pub(crate) fn index_mv_sublist(options: Options) -> FormatParams {
+pub fn index_mv_sublist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/cloudvideo/allvideo/sublist";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1119,7 +1119,7 @@ pub(crate) fn index_mv_sublist(options: Options) -> FormatParams {
 }
 
 // #[get("/mv/url")]
-pub(crate) fn index_mv_url(options: Options) -> FormatParams {
+pub fn index_mv_url(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/song/enhance/play/mv/url";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1131,25 +1131,25 @@ pub(crate) fn index_mv_url(options: Options) -> FormatParams {
 }
 
 // #[get("/personal/fm")]
-pub(crate) fn index_personal_fm(options: Options) -> FormatParams {
+pub fn index_personal_fm(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v1/radio/get";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/personalized/djprogram")]
-pub(crate) fn index_personalized_djprogram(options: Options) -> FormatParams {
+pub fn index_personalized_djprogram(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/personalized/djprogram";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/personalized/mv")]
-pub(crate) fn index_personalized_mv(options: Options) -> FormatParams {
+pub fn index_personalized_mv(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/personalized/mv";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/personalized/newsong")]
-pub(crate) fn index_personalized_newsong(options: Options) -> FormatParams {
+pub fn index_personalized_newsong(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/personalized/newsong";
     let query_params = json_object!({
         "type": "recommend",
@@ -1159,13 +1159,13 @@ pub(crate) fn index_personalized_newsong(options: Options) -> FormatParams {
 }
 
 // #[get("/personalized/privatecontent")]
-pub(crate) fn index_personalized_privatecontent(options: Options) -> FormatParams {
+pub fn index_personalized_privatecontent(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/personalized/privatecontent";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/personalized")]
-pub(crate) fn index_personalized(options: Options) -> FormatParams {
+pub fn index_personalized(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/personalized/playlist";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1178,13 +1178,13 @@ pub(crate) fn index_personalized(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/catlist")]
-pub(crate) fn index_playlist_catlist(options: Options) -> FormatParams {
+pub fn index_playlist_catlist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/playlist/catalogue";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/playlist/create")]
-pub(crate) fn index_playlist_create(options: Options) -> FormatParams {
+pub fn index_playlist_create(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/playlist/create";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1196,7 +1196,7 @@ pub(crate) fn index_playlist_create(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/delete")]
-pub(crate) fn index_playlist_delete(options: Options) -> FormatParams {
+pub fn index_playlist_delete(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/playlist/delete";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1207,7 +1207,7 @@ pub(crate) fn index_playlist_delete(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/desc_update")]
-pub(crate) fn index_playlist_desc_update(options: Options) -> FormatParams {
+pub fn index_playlist_desc_update(options: Options) -> FormatParams {
     let url = "http://interface3.music.163.com/eapi/playlist/desc/update";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1225,7 +1225,7 @@ pub(crate) fn index_playlist_desc_update(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/detail")]
-pub(crate) fn index_playlist_detail(options: Options) -> FormatParams {
+pub fn index_playlist_detail(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/v6/playlist/detail";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1238,13 +1238,13 @@ pub(crate) fn index_playlist_detail(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/hot")]
-pub(crate) fn index_playlist_hot(options: Options) -> FormatParams {
+pub fn index_playlist_hot(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/playlist/hottags";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/playlist/name/update")]
-pub(crate) fn index_playlist_name_update(options: Options) -> FormatParams {
+pub fn index_playlist_name_update(options: Options) -> FormatParams {
     let url = "http://interface3.music.163.com/eapi/playlist/update/name";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1262,7 +1262,7 @@ pub(crate) fn index_playlist_name_update(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/subscribe")]
-pub(crate) fn index_playlist_subscribe(options: Options) -> FormatParams {
+pub fn index_playlist_subscribe(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let _t = if query.value("t").unwrap_or("0") == "1" {
         "subscribe"
@@ -1278,7 +1278,7 @@ pub(crate) fn index_playlist_subscribe(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/subscribers")]
-pub(crate) fn index_playlist_subscribers(options: Options) -> FormatParams {
+pub fn index_playlist_subscribers(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/playlist/subscribers";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1291,7 +1291,7 @@ pub(crate) fn index_playlist_subscribers(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/tags/update")]
-pub(crate) fn index_playlist_tags_update(options: Options) -> FormatParams {
+pub fn index_playlist_tags_update(options: Options) -> FormatParams {
     let url = "http://interface3.music.163.com/eapi/playlist/tags/update";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1309,7 +1309,7 @@ pub(crate) fn index_playlist_tags_update(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/tracks")]
-pub(crate) fn index_playlist_tracks(options: Options) -> FormatParams {
+pub fn index_playlist_tracks(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/playlist/manipulate/tracks";
     let query = QueryParams::from(options.params);
     let ids = "[".to_owned() + query.value("trakcs").unwrap() + "]";
@@ -1323,7 +1323,7 @@ pub(crate) fn index_playlist_tracks(options: Options) -> FormatParams {
 }
 
 // #[get("/playlist/update")]
-pub(crate) fn index_playlist_update(options: Options) -> FormatParams {
+pub fn index_playlist_update(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/batch";
     let query = QueryParams::from(options.params);
     let _id = query.value("id").unwrap();
@@ -1352,7 +1352,7 @@ pub(crate) fn index_playlist_update(options: Options) -> FormatParams {
 }
 
 // #[get("/playmode/intelligence/list")]
-pub(crate) fn index_playmode_intelligence_list(options: Options) -> FormatParams {
+pub fn index_playmode_intelligence_list(options: Options) -> FormatParams {
     let url = "http://music.163.com/weapi/playmode/intelligence/list";
     let query = QueryParams::from(options.params);
     let ids = "[".to_owned() + query.value("trakcs").unwrap() + "]";
@@ -1368,7 +1368,7 @@ pub(crate) fn index_playmode_intelligence_list(options: Options) -> FormatParams
 }
 
 // #[get("/program/recommend")]
-pub(crate) fn index_program_recommend(options: Options) -> FormatParams {
+pub fn index_program_recommend(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/program/recommend/v1";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1381,7 +1381,7 @@ pub(crate) fn index_program_recommend(options: Options) -> FormatParams {
 }
 
 // #[get("/rebind")]
-pub(crate) fn index_rebind(options: Options) -> FormatParams {
+pub fn index_rebind(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/user/replaceCellphone";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1396,13 +1396,13 @@ pub(crate) fn index_rebind(options: Options) -> FormatParams {
 }
 
 // #[get("/recommend/resource")]
-pub(crate) fn index_recommend_resource(options: Options) -> FormatParams {
+pub fn index_recommend_resource(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v1/discovery/recommend/resource";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/recommend/songs")]
-pub(crate) fn index_recommend_songs(options: Options) -> FormatParams {
+pub fn index_recommend_songs(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v1/discovery/recommend/songs";
     let query_params = json_object!({
         "total": "true",
@@ -1412,7 +1412,7 @@ pub(crate) fn index_recommend_songs(options: Options) -> FormatParams {
 }
 
 // #[get("/register/cellphone")]
-pub(crate) fn index_register_cellphone(options: Options) -> FormatParams {
+pub fn index_register_cellphone(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/register/cellphone";
     let query = QueryParams::from(options.params);
     let pw = Crypto::hash_encrypt(query.value("password").unwrap(), HashType::md5, hex::encode);
@@ -1428,7 +1428,7 @@ pub(crate) fn index_register_cellphone(options: Options) -> FormatParams {
 }
 
 // #[get("/related/allvideo")]
-pub(crate) fn index_related_allvideo(options: Options) -> FormatParams {
+pub fn index_related_allvideo(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/cloudvideo/v1/allvideo/rcmd";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1440,7 +1440,7 @@ pub(crate) fn index_related_allvideo(options: Options) -> FormatParams {
 }
 
 // #[get("/related/playlist")]
-pub(crate) fn index_related_playlist(options: Options) -> FormatParams {
+pub fn index_related_playlist(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/playlist?id={}",
@@ -1450,7 +1450,7 @@ pub(crate) fn index_related_playlist(options: Options) -> FormatParams {
 }
 
 // #[get("/resource/like")]
-pub(crate) fn index_resource_like(options: Options) -> FormatParams {
+pub fn index_resource_like(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let _t = if query.value("t").unwrap_or("0") == "1" {
         "like"
@@ -1470,7 +1470,7 @@ pub(crate) fn index_resource_like(options: Options) -> FormatParams {
 }
 
 // #[get("/search/default")]
-pub(crate) fn index_search_default(options: Options) -> FormatParams {
+pub fn index_search_default(options: Options) -> FormatParams {
     let url = "http://interface3.music.163.com/eapi/search/defaultkeyword/get";
     let query_params = json_object!({});
     let cookies = get_cookie_string(options.cookie);
@@ -1485,13 +1485,13 @@ pub(crate) fn index_search_default(options: Options) -> FormatParams {
 }
 
 // #[get("/search/hot/detail")]
-pub(crate) fn index_search_hot_detail(options: Options) -> FormatParams {
+pub fn index_search_hot_detail(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/hotsearchlist/get";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/search/hot")]
-pub(crate) fn index_search_hot(options: Options) -> FormatParams {
+pub fn index_search_hot(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/search/hot";
     let query_params = json_object!({
         "type": "1111",
@@ -1508,7 +1508,7 @@ pub(crate) fn index_search_hot(options: Options) -> FormatParams {
 }
 
 // #[get("/search/multimatch")]
-pub(crate) fn index_search_multimatch(options: Options) -> FormatParams {
+pub fn index_search_multimatch(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/search/suggest/multimatch";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1521,7 +1521,7 @@ pub(crate) fn index_search_multimatch(options: Options) -> FormatParams {
 }
 
 // #[get("/search/suggest")]
-pub(crate) fn index_search_suggest(options: Options) -> FormatParams {
+pub fn index_search_suggest(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let _type = if query.value("type").unwrap_or("mobile") == "mobile" {
         "keyword"
@@ -1538,7 +1538,7 @@ pub(crate) fn index_search_suggest(options: Options) -> FormatParams {
 }
 
 // #[get("/search")]
-pub(crate) fn index_search(options: Options) -> FormatParams {
+pub fn index_search(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/search/get";
 
     let query_string = QueryParams::from(options.params);
@@ -1554,7 +1554,7 @@ pub(crate) fn index_search(options: Options) -> FormatParams {
 }
 
 // #[get("/send/playlist")]
-pub(crate) fn index_send_playlist(options: Options) -> FormatParams {
+pub fn index_send_playlist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/msg/private/send";
     let query = QueryParams::from(options.params);
     let _ids = "[".to_owned() + query.value("user_ids").unwrap() + "]";
@@ -1570,7 +1570,7 @@ pub(crate) fn index_send_playlist(options: Options) -> FormatParams {
 }
 
 // #[get("/send/text")]
-pub(crate) fn index_send_text(options: Options) -> FormatParams {
+pub fn index_send_text(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/msg/private/send";
     let query = QueryParams::from(options.params);
     let _ids = "[".to_owned() + query.value("user_ids").unwrap() + "]";
@@ -1586,13 +1586,13 @@ pub(crate) fn index_send_text(options: Options) -> FormatParams {
 }
 
 // #[get("/setting")]
-pub(crate) fn index_setting(options: Options) -> FormatParams {
+pub fn index_setting(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/user/setting";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/share/resource")]
-pub(crate) fn index_share_resource(options: Options) -> FormatParams {
+pub fn index_share_resource(options: Options) -> FormatParams {
     let url = "http://music.163.com/weapi/share/friends/resource";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1606,7 +1606,7 @@ pub(crate) fn index_share_resource(options: Options) -> FormatParams {
 }
 
 // #[get("/simi/artist")]
-pub(crate) fn index_simi_artist(options: Options) -> FormatParams {
+pub fn index_simi_artist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/discovery/simiArtist";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1618,7 +1618,7 @@ pub(crate) fn index_simi_artist(options: Options) -> FormatParams {
 }
 
 // #[get("/simi/mv")]
-pub(crate) fn index_simi_mv(options: Options) -> FormatParams {
+pub fn index_simi_mv(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/discovery/simiMV";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1630,7 +1630,7 @@ pub(crate) fn index_simi_mv(options: Options) -> FormatParams {
 }
 
 // #[get("/simi/playlist")]
-pub(crate) fn index_simi_playlist(options: Options) -> FormatParams {
+pub fn index_simi_playlist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/discovery/simiPlaylist";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1644,7 +1644,7 @@ pub(crate) fn index_simi_playlist(options: Options) -> FormatParams {
 }
 
 // #[get("/simi/song")]
-pub(crate) fn index_simi_song(options: Options) -> FormatParams {
+pub fn index_simi_song(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v1/discovery/simiSong";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1658,7 +1658,7 @@ pub(crate) fn index_simi_song(options: Options) -> FormatParams {
 }
 
 // #[get("/simi/user")]
-pub(crate) fn index_simi_user(options: Options) -> FormatParams {
+pub fn index_simi_user(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/discovery/simiUser";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1672,7 +1672,7 @@ pub(crate) fn index_simi_user(options: Options) -> FormatParams {
 }
 
 // #[get("/song/detail")]
-pub(crate) fn index_song_detail(options: Options) -> FormatParams {
+pub fn index_song_detail(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v3/song/detail";
     let query = QueryParams::from(options.params);
     let c = &format!(r#""[{{"id":{}}}]""#, query.value("ids").unwrap());
@@ -1686,7 +1686,7 @@ pub(crate) fn index_song_detail(options: Options) -> FormatParams {
 }
 
 // #[get("/song/url")]
-pub(crate) fn index_song_url(options: Options) -> FormatParams {
+pub fn index_song_url(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/song/enhance/player/url";
     let query = QueryParams::from(options.params);
 
@@ -1701,7 +1701,7 @@ pub(crate) fn index_song_url(options: Options) -> FormatParams {
 }
 
 // #[get("/song/url/v1")]
-pub(crate) fn index_song_url_v1(options: Options) -> FormatParams {
+pub fn index_song_url_v1(options: Options) -> FormatParams {
     let url = "https://interface.music.163.com/eapi/song/enhance/player/url/v1";
     let query = QueryParams::from(options.params);
     let ids = "[".to_owned() + query.value("id").unwrap() + "]";
@@ -1726,7 +1726,7 @@ pub(crate) fn index_song_url_v1(options: Options) -> FormatParams {
 }
 
 // #[get("/top/album")]
-pub(crate) fn index_top_album(options: Options) -> FormatParams {
+pub fn index_top_album(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/album/new";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1740,7 +1740,7 @@ pub(crate) fn index_top_album(options: Options) -> FormatParams {
 }
 
 // #[get("/top/artist")]
-pub(crate) fn index_top_artist(options: Options) -> FormatParams {
+pub fn index_top_artist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/artist/top";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1753,7 +1753,7 @@ pub(crate) fn index_top_artist(options: Options) -> FormatParams {
 }
 
 // #[get("/top/list")]
-pub(crate) fn index_top_list(options: Options) -> FormatParams {
+pub fn index_top_list(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v3/playlist/detail";
     let query = QueryParams::from(options.params);
     static top_list: [&str; 37] = [
@@ -1804,7 +1804,7 @@ pub(crate) fn index_top_list(options: Options) -> FormatParams {
 }
 
 // #[get("/top/mv")]
-pub(crate) fn index_top_mv(options: Options) -> FormatParams {
+pub fn index_top_mv(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/mv/toplist";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1818,7 +1818,7 @@ pub(crate) fn index_top_mv(options: Options) -> FormatParams {
 }
 
 // #[get("/top/playlist/highquality")]
-pub(crate) fn index_top_playlist_highquality(options: Options) -> FormatParams {
+pub fn index_top_playlist_highquality(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/playlist/highquality/list";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1832,7 +1832,7 @@ pub(crate) fn index_top_playlist_highquality(options: Options) -> FormatParams {
 }
 
 // #[get("/top/playlist")]
-pub(crate) fn index_top_playlist(options: Options) -> FormatParams {
+pub fn index_top_playlist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/playlist/list";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1847,7 +1847,7 @@ pub(crate) fn index_top_playlist(options: Options) -> FormatParams {
 }
 
 // #[get("/top/song")]
-pub(crate) fn index_top_song(options: Options) -> FormatParams {
+pub fn index_top_song(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v1/discovery/new/songs";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1859,7 +1859,7 @@ pub(crate) fn index_top_song(options: Options) -> FormatParams {
 }
 
 // #[get("/toplist/artist")]
-pub(crate) fn index_toplist_artist(options: Options) -> FormatParams {
+pub fn index_toplist_artist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/toplist/artist";
     let query_params = json_object!({
         "type": "1",
@@ -1872,19 +1872,19 @@ pub(crate) fn index_toplist_artist(options: Options) -> FormatParams {
 }
 
 // #[get("/toplist/detail")]
-pub(crate) fn index_toplist_detail(options: Options) -> FormatParams {
+pub fn index_toplist_detail(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/toplist/detail";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/toplist")]
-pub(crate) fn index_toplist(options: Options) -> FormatParams {
+pub fn index_toplist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/toplist";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/user/audio")]
-pub(crate) fn index_user_audio(options: Options) -> FormatParams {
+pub fn index_user_audio(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/djradio/get/byuser";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1895,7 +1895,7 @@ pub(crate) fn index_user_audio(options: Options) -> FormatParams {
 }
 
 // #[get("/user/cloud/del")]
-pub(crate) fn index_user_cloud_del(options: Options) -> FormatParams {
+pub fn index_user_cloud_del(options: Options) -> FormatParams {
     let url = "http://music.163.com/weapi/cloud/del";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1906,7 +1906,7 @@ pub(crate) fn index_user_cloud_del(options: Options) -> FormatParams {
 }
 
 // #[get("/user/cloud/detail")]
-pub(crate) fn index_user_cloud_detail(options: Options) -> FormatParams {
+pub fn index_user_cloud_detail(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v1/cloud/get/byids";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1917,7 +1917,7 @@ pub(crate) fn index_user_cloud_detail(options: Options) -> FormatParams {
 }
 
 // #[get("/user/cloud")]
-pub(crate) fn index_user_cloud(options: Options) -> FormatParams {
+pub fn index_user_cloud(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v1/cloud/get";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -1929,7 +1929,7 @@ pub(crate) fn index_user_cloud(options: Options) -> FormatParams {
 }
 
 // #[get("/user/detail")]
-pub(crate) fn index_user_detail(options: Options) -> FormatParams {
+pub fn index_user_detail(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/v1/user/detail/{}",
@@ -1939,7 +1939,7 @@ pub(crate) fn index_user_detail(options: Options) -> FormatParams {
 }
 
 // #[get("/user/dj")]
-pub(crate) fn index_user_dj(options: Options) -> FormatParams {
+pub fn index_user_dj(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/dj/program/{}",
@@ -1954,7 +1954,7 @@ pub(crate) fn index_user_dj(options: Options) -> FormatParams {
 }
 
 // #[get("/user/event")]
-pub(crate) fn index_user_event(options: Options) -> FormatParams {
+pub fn index_user_event(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/event/get/{}",
@@ -1971,7 +1971,7 @@ pub(crate) fn index_user_event(options: Options) -> FormatParams {
 }
 
 // #[get("/user/followeds")]
-pub(crate) fn index_user_followeds(options: Options) -> FormatParams {
+pub fn index_user_followeds(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/eapi/user/getfolloweds/{}",
@@ -1994,7 +1994,7 @@ pub(crate) fn index_user_followeds(options: Options) -> FormatParams {
 }
 
 // #[get("/user/follows")]
-pub(crate) fn index_user_follows(options: Options) -> FormatParams {
+pub fn index_user_follows(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = &format!(
         "https://music.163.com/weapi/user/getfollows/{}",
@@ -2010,7 +2010,7 @@ pub(crate) fn index_user_follows(options: Options) -> FormatParams {
 }
 
 // #[get("/user/playlist")]
-pub(crate) fn index_user_playlist(options: Options) -> FormatParams {
+pub fn index_user_playlist(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/user/playlist";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -2023,7 +2023,7 @@ pub(crate) fn index_user_playlist(options: Options) -> FormatParams {
 }
 
 // #[get("/user/record")]
-pub(crate) fn index_user_record(options: Options) -> FormatParams {
+pub fn index_user_record(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v1/play/record";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -2035,19 +2035,19 @@ pub(crate) fn index_user_record(options: Options) -> FormatParams {
 }
 
 // #[get("/user/account")]
-pub(crate) fn index_user_account(options: Options) -> FormatParams {
+pub fn index_user_account(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/nuser/account/get";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/user/subcount")]
-pub(crate) fn index_user_subcount(options: Options) -> FormatParams {
+pub fn index_user_subcount(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/subcount";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/user/update")]
-pub(crate) fn index_user_update(options: Options) -> FormatParams {
+pub fn index_user_update(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/user/profile/update";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -2064,7 +2064,7 @@ pub(crate) fn index_user_update(options: Options) -> FormatParams {
 }
 
 // #[get("/video/detail")]
-pub(crate) fn index_video_detail(options: Options) -> FormatParams {
+pub fn index_video_detail(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/cloudvideo/v1/video/detail";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -2075,13 +2075,13 @@ pub(crate) fn index_video_detail(options: Options) -> FormatParams {
 }
 
 // #[get("/video/group/list")]
-pub(crate) fn index_video_group_list(options: Options) -> FormatParams {
+pub fn index_video_group_list(options: Options) -> FormatParams {
     let url = "https://music.163.com/api/cloudvideo/group/list";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
 
 // #[get("/video/group")]
-pub(crate) fn index_video_group(options: Options) -> FormatParams {
+pub fn index_video_group(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/videotimeline/videogroup/get";
     let query = QueryParams::from(options.params);
     let query_params = json_object!({
@@ -2095,7 +2095,7 @@ pub(crate) fn index_video_group(options: Options) -> FormatParams {
 }
 
 // #[get("/video/sub")]
-pub(crate) fn index_video_sub(options: Options) -> FormatParams {
+pub fn index_video_sub(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let _t = if query.value("t").unwrap_or("0") == "1" {
         "sub"
@@ -2111,7 +2111,7 @@ pub(crate) fn index_video_sub(options: Options) -> FormatParams {
 }
 
 // #[get("/video/url")]
-pub(crate) fn index_video_url(options: Options) -> FormatParams {
+pub fn index_video_url(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let url = "https://music.163.com/weapi/cloudvideo/playurl";
     let ids = r#"[\""#.to_owned() + query.value("id").unwrap() + r#"\"]"#;
@@ -2124,7 +2124,7 @@ pub(crate) fn index_video_url(options: Options) -> FormatParams {
 }
 
 // #[get("/weblog")]
-pub(crate) fn index_weblog(options: Options) -> FormatParams {
+pub fn index_weblog(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/feedback/weblog";
     empty_query_params_handler(url, "weapi", options.cookie)
 }
@@ -2133,7 +2133,7 @@ pub(crate) fn index_weblog(options: Options) -> FormatParams {
 mod tests {
     use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 
-    use crate::netease::Options;
+    use crate::Options;
 
     use super::index_top_list;
 

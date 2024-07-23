@@ -4,7 +4,7 @@ use serde_json;
 use std::collections::HashMap;
 use urlqstring::QueryParams;
 
-use crate::netease::FormatParams;
+use crate::FormatParams;
 
 use reqwest::header::{
     HeaderMap, HeaderValue, CONTENT_ENCODING, CONTENT_TYPE, COOKIE, REFERER, USER_AGENT,
