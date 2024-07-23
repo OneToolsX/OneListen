@@ -4,13 +4,13 @@ use serde_json;
 use std::collections::HashMap;
 use urlqstring::QueryParams;
 
-use crate::FormatParams;
+use crate::netease::FormatParams;
 
 use reqwest::header::{
     HeaderMap, HeaderValue, CONTENT_ENCODING, CONTENT_TYPE, COOKIE, REFERER, USER_AGENT,
 };
 
-use crate::crypto::Crypto;
+use crate::netease::crypto::Crypto;
 
 lazy_static! {
     static ref _CSRF: Regex = Regex::new(r"_csrf=(?P<csrf>[^(;|$)]+)").unwrap();

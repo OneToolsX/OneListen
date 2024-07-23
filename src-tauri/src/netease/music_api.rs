@@ -1,13 +1,13 @@
 use urlqstring::QueryParams;
 
-use crate::crypto::{Crypto, HashType};
+use crate::json_object;
+use crate::netease::crypto::{Crypto, HashType};
 
-use crate::request::generate_response;
+use crate::netease::request::generate_response;
 use std::collections::HashMap;
 
-use crate::Options;
-use crate::FormatParams;
-
+use crate::netease::FormatParams;
+use crate::netease::Options;
 
 fn get_cookie_string(cookie: &str) -> String {
     if !cookie.is_empty() {
@@ -112,10 +112,7 @@ pub(crate) fn index_album(options: Options) -> FormatParams {
 pub(crate) fn index_artist_detail(options: Options) -> FormatParams {
     let query_string = QueryParams::from(options.params);
     let id = query_string.value("id").unwrap();
-    let url = &format!(
-        "https://music.163.com/api/artist/head/info/get?id={}",
-        id
-    );
+    let url = &format!("https://music.163.com/api/artist/head/info/get?id={}", id);
     let query_params = json_object!({
         "id": id
     });
@@ -906,7 +903,7 @@ pub(crate) fn index_login_qr_key(options: Options) -> FormatParams {
 pub(crate) fn index_login_qr_create(options: Options) -> FormatParams {
     let query = QueryParams::from(options.params);
     let codekey = query.value("key").unwrap();
-    let url = &format!("https://music.163.com/login?codekey={}",codekey);
+    let url = &format!("https://music.163.com/login?codekey={}", codekey);
     let _params = json_object!({});
     let cookies = get_cookie_string(options.cookie);
     request_handler(url, "weapi", _params, &cookies)
@@ -1708,7 +1705,7 @@ pub(crate) fn index_song_url_v1(options: Options) -> FormatParams {
     let url = "https://interface.music.163.com/eapi/song/enhance/player/url/v1";
     let query = QueryParams::from(options.params);
     let ids = "[".to_owned() + query.value("id").unwrap() + "]";
-    let _level:&str = query.value("level").unwrap_or("standard");
+    let _level: &str = query.value("level").unwrap_or("standard");
     let mut query_params = json_object!({
         "ids": ids.as_str(),
         "encodeType": "flac",
@@ -2130,4 +2127,25 @@ pub(crate) fn index_video_url(options: Options) -> FormatParams {
 pub(crate) fn index_weblog(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/feedback/weblog";
     empty_query_params_handler(url, "weapi", options.cookie)
+}
+
+#[cfg(test)]
+mod tests {
+    use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
+
+    use crate::netease::Options;
+
+    use super::index_top_list;
+
+    #[test]
+    fn test_index_top_list() {
+        let options = Options {
+            params: vec![("idx", "0")],
+            cookie: &"".to_string(),
+            url: &"".to_string(),
+            method: &"".to_string(),
+        };
+        let result = index_top_list(options);
+        println!("{:?}", result);
+    }
 }
