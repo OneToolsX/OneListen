@@ -67,8 +67,11 @@ name = "app"
 version = "0.1.5"
 dependencies = [
  "base64 0.22.1",
+ "hex",
+ "lazy_static",
  "openssl",
  "rand 0.8.5",
+ "regex",
  "reqwest 0.12.5",
  "serde",
  "serde_json",
