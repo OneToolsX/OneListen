@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { usePlayerStore } from '~/composables/Player';
 
-const {
-    audio, currentSong, play, pause, stop,
-} = usePlayer();
+const playerStore = usePlayerStore();
+
+const { currentSong } = playerStore;
 
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 const currentTime = ref('');
@@ -39,9 +40,6 @@ const updateDuration = () => {
     }
 };
 
-onMounted(() => {
-    audio.value = audioPlayer.value;
-});
 
 </script>
 

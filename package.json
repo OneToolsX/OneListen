@@ -9,9 +9,14 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "overrides": {
+    "vue": "latest"
+  },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
     "@tauri-apps/api": "^1.6.0",
     "nuxt": "^3.12.3",
+    "pinia": "^2.1.7",
     "vue": "latest"
   },
   "devDependencies": {
