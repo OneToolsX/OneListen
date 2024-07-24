@@ -9,8 +9,8 @@ const request_click = async () => {
   let a = await request({
     url: '/song/url',
     params: { id: "2607303573,2124385868", br: 320000 }
-  })
-  console.log(a);
+  });
+  console.log(a.data.data[0].url);
 };
 
 </script>

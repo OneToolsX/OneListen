@@ -62,7 +62,6 @@ async function tauriRequest({
 export async function tauriGetRequestOptions(options = {}) {
 
     const result = await invoke("get_params", { options }) as any;
-    console.log(result);
     
     return {
         url: result.url,
