@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { usePlayerStore } from '~/composables/Player';
+
 
 const playerStore = usePlayerStore();
 
-const { currentSong } = playerStore;
+const { currentSong, fetchCurrentSong } = playerStore;
 
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 const currentTime = ref('');
@@ -12,15 +11,20 @@ const duration = ref('');
 const isPlaying = ref(false);
 
 const togglePlay = () => {
-    if (!audioPlayer.value) return;
-    if (audioPlayer.value.paused) {
-        audioPlayer.value.play();
-        isPlaying.value = true;
-    } else {
-        audioPlayer.value.pause();
-        isPlaying.value = false;
+    if (audioPlayer.value) {
+        if (audioPlayer.value.paused) {
+            audioPlayer.value.play().catch(error => {
+                console.error('Error playing audio:', error);
+            });
+            isPlaying.value = true;
+        } else {
+            audioPlayer.value.pause();
+            isPlaying.value = false;
+        }
     }
 };
+
+
 
 const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
