@@ -45,6 +45,29 @@ const selectRank = (rank: Playlist) => {
 const goBack = () => {
     selectedRank.value = null;
 };
+
+const { addSongToList } = usePlayerStore();
+
+const addToList = async (track: Track) => {
+    console.log(track);
+
+    try {
+        let songResponse = await request({
+            url: '/song/url',
+            params: { id: track.id, br: 320000 }
+        });
+        addSongToList({
+            id: track.id,
+            name: track.name,
+            url: songResponse.data.data[0].url
+        });
+
+    } catch (error) {
+        console.error('Failed to add track to playlist:', error);
+    }
+
+
+}
 </script>
 
 <template>
@@ -65,6 +88,8 @@ const goBack = () => {
                 <div class="flex flex-wrap">
                     <div v-for="track in selectedRank.tracks" :key="track.id" class="track-item mb-2 mr-4">
                         {{ track.name }}
+                        <button @click="addToList(track)" class="ml-2 px-2 py-1 bg-green-500 text-white rounded">Add to
+                            List</button>
                     </div>
                 </div>
             </div>
