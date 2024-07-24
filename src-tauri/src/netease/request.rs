@@ -178,9 +178,10 @@ fn handle_request(
             )
         })
         .collect();
-    println!("-----headers={:?}", headers);
-    println!("-----body={:?}", body);
-    println!("-----url={:?}", url);
+    // no println! in release mode
+    // println!("-----headers={:?}", headers);
+    // println!("-----body={:?}", body);
+    // println!("-----url={:?}", url);
 
     FormatParams {
         url: url.to_string(),

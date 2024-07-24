@@ -60,12 +60,10 @@ async function tauriRequest({
 
 // Rust to assemble request parameters
 export async function tauriGetRequestOptions(options = {}) {
-    console.log(options);
-    
+
     const result = await invoke("get_params", { options }) as any;
     console.log(result);
     
-
     return {
         url: result.url,
         options: {
