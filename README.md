@@ -29,3 +29,5 @@ This command initiates the development server, allowing you to test and develop 
 ### NetEase Cloud Music
 
 [rust for NetEase Cloud Music](https://github.com/tthzwq/NeteaseCloudMusic)
+
+[NetEase Cloud Music API](https://docs-neteasecloudmusicapi.vercel.app/)

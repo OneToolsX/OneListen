@@ -1756,7 +1756,7 @@ pub fn index_top_artist(options: Options) -> FormatParams {
 pub fn index_top_list(options: Options) -> FormatParams {
     let url = "https://music.163.com/weapi/v3/playlist/detail";
     let query = QueryParams::from(options.params);
-    static top_list: [&str; 37] = [
+    static TOP_LIST: [&str; 37] = [
         "3779629",    //云音乐新歌榜
         "3778678",    //云音乐热歌榜
         "2884035",    //云音乐原创榜
@@ -1796,7 +1796,7 @@ pub fn index_top_list(options: Options) -> FormatParams {
         "3001890046", //云音乐ACG VOCALOID榜
     ];
     let query_params = json_object!({
-        "id": top_list[query.value("idx").unwrap_or("0").parse::<usize>().unwrap()],
+        "id": TOP_LIST[query.value("idx").unwrap_or("0").parse::<usize>().unwrap()],
         "n": "10000",
     });
     let cookies = get_cookie_string(options.cookie);
@@ -2131,7 +2131,6 @@ pub fn index_weblog(options: Options) -> FormatParams {
 
 #[cfg(test)]
 mod tests {
-    use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 
     use crate::Options;
 

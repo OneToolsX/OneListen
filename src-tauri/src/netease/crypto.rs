@@ -40,6 +40,7 @@ impl Crypto {
         hex_string
     }
 
+    #[allow(dead_code)]
     pub fn eapi(url: &str, text: &str) -> String {
         let message = format!("nobody{}use{}md5forencrypt", url, text);
         let digest = hex::encode(hash(MessageDigest::md5(), message.as_bytes()).unwrap());
